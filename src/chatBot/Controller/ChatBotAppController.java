@@ -16,24 +16,37 @@ public class ChatBotAppController
 	public ChatBotAppController()
 	{
 		appView = new ChatBotView(this);
-		Billy = new ChatBot("Mr. not so clever");
+		Billy = new ChatBot("Billy");
+		
+	}
+	
+	
+	/**
+	 * Allows other objects access to the Billy
+	 * @return The ChatBot for this app.
+	 */
+	public ChatBot getBilly()
+	{
+		return Billy;
 	}
 	
 	/**
 	 * Starts the ChatBot Application.
 	 */
-	
 	public void start()
 	{
-		String message = JOptionPane.showInputDialog(null, "Would you like to continue");
-		if(Billy.quitChecker(message))
-		{
-			quit();
-		}
-			
-		JOptionPane.showMessageDialog(null, "We are not done yet...");
-	}
+		String message = JOptionPane.showInputDialog(null, "Welcome to ChatBot, type in your name.");
 
+		while(!Billy.quitChecker(message))
+		{
+			message = appView.displayChatBotConversations(message);
+		}
+		
+	}
+	
+	/**
+	 * If i were to say quit to ChatBot, This will end ChatBot.
+	 */
 	private void quit()
 	{
 		JOptionPane.showMessageDialog(null, "bye");
