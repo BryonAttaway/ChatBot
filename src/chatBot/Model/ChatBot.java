@@ -7,19 +7,21 @@ public class ChatBot
 	private String name;
 	private int numberOfChats;
 	private ArrayList<String> memeList;
+	private String content;
 
 	/**
 	 * Create a ChatBot object with a specified name. Initializes the total
 	 * chats to 0.
 	 * 
-	 * @param name
-	 *            The name of the ChatBot.
+	 * @param name The name of the ChatBot.
 	 */
 	public ChatBot(String name)
 	{
 		this.name = name;
 		numberOfChats = 0;
-
+		
+		content = "Games";
+		
 		memeList = new ArrayList<String>();
 		fillTheMemeList();
 		// this. means talk to the current class.
@@ -50,7 +52,10 @@ public class ChatBot
 	{
 		this.name = name;
 	}
-
+	
+	/**
+	 * Increments the chat count for the Chatbot. Used for tracking the activity of the Chatbot.
+	 */
 	public void incrementChats()
 	{
 		numberOfChats++;
@@ -81,20 +86,63 @@ public class ChatBot
 	{
 		String processedText = "";
 		incrementChats();
-
-		if (memeChecker(userText))
+		
+		int randomChoice = (int) (Math.random() * 3);
+		
+		if(randomChoice == 0)
 		{
-			processedText = "hey, you found a meme: " + userText;
-			processedText += " int't that cool.";
+			//use stringLengthChecker here
+		}
+		else if (randomChoice == 1)
+		{
+			//use contentChecker here
 		}
 		else
 		{
-			processedText = "Boring that wan't a meme.";
+			if (memeChecker(userText))
+			{
+				processedText = "hey, you found a meme: " + userText;
+				processedText += " int't that cool.";
+			}
+			else
+			{
+				processedText = "Boring that wan't a meme.";
+			}
 		}
-
+		
+		
 		return processedText;
 	}
 
+	private boolean stringLengthChecker(String input)
+	{
+		boolean isTooLong = false;
+		
+		if(input.length() >=15)
+		{
+			isTooLong;
+		}
+		
+		return isTooLong;
+	}
+	
+	private boolean contentChecker(String input)
+	{
+		boolean hasMyContent = false;
+		
+		if(input.contains(content))
+		{
+			hasMyContent = true;
+		}
+		
+		return hasMyContent;
+	}
+	
+	/**
+	 * This will check if the input matches any of the memes.
+	 * @param currentText the text that the user supplies
+	 * @returnWhether the String matched any of the built in memes
+	 */
 	private boolean memeChecker(String currentText)
 	{
 		boolean isAMeme = false;
@@ -102,14 +150,6 @@ public class ChatBot
 		for (String currentMeme : memeList)
 		{
 			if (currentMeme.equalsIgnoreCase(currentText))
-			{
-				isAMeme = true;
-			}
-		}
-
-		for (int loopCount = 0; loopCount < memeList.size(); loopCount++)
-		{
-			if (memeList.get(loopCount).equalsIgnoreCase(currentText))
 			{
 				isAMeme = true;
 			}
