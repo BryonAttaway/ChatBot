@@ -8,20 +8,18 @@ public class ChatBot
 	private int numberOfChats;
 	private ArrayList<String> memeList;
 	private String content;
-
 	/**
 	 * Create a ChatBot object with a specified name. Initializes the total
 	 * chats to 0.
 	 * 
-	 * @param name The name of the ChatBot.
+	 * @param name
+	 *            The name of the ChatBot.
 	 */
 	public ChatBot(String name)
 	{
 		this.name = name;
 		numberOfChats = 0;
-		
-		content = "Games";
-		
+
 		memeList = new ArrayList<String>();
 		fillTheMemeList();
 		// this. means talk to the current class.
@@ -52,9 +50,10 @@ public class ChatBot
 	{
 		this.name = name;
 	}
-	
+
 	/**
-	 * Increments the chat count for the Chatbot. Used for tracking the activity of the Chatbot.
+	 * Increments the chat count for the Chatbot. Used for tracking the activity
+	 * of the Chatbot.
 	 */
 	public void incrementChats()
 	{
@@ -70,13 +69,13 @@ public class ChatBot
 		memeList.add("doh!");
 		memeList.add("One does not simply");
 		memeList.add("ALIENS!");
-		memeList.add("I don't know who you are...");
+		memeList.add("I dont know who you are...");
 		memeList.add("I dont always...");
 	}
 
 	/**
-	 * Processed the supplied text from the user to provide a message from the Chatbot.
-	 * Chatbot.
+	 * Processed the supplied text from the user to provide a message from the
+	 * Chatbot. Chatbot.
 	 * 
 	 * @param userText
 	 *            The user supplied text.
@@ -86,31 +85,51 @@ public class ChatBot
 	{
 		String processedText = "";
 		incrementChats();
-		
+
 		int randomChoice = (int) (Math.random() * 3);
-		
-		if(randomChoice == 0)
+
+		if (userText != null)
 		{
-			//use stringLengthChecker here
-		}
-		else if (randomChoice == 1)
-		{
-			//use contentChecker here
-		}
-		else
-		{
-			if (memeChecker(userText))
+
+			if (randomChoice == 0)
 			{
-				processedText = "hey, you found a meme: " + userText;
-				processedText += " int't that cool.";
+				if(stringLengthChecker(userText))
+				{
+					processedText = "Hey, you should type smaller messages";
+				}
+				else
+				{
+					processedText = "tiny message";
+				}
+				
+				// use stringLengthChecker here
+			}
+			else if (randomChoice == 1)
+			{
+				if(contentChecker(userText))
+				{
+					processedText = "You know exactly what i want to learn about :) games, will you tell me about your favorite game?";
+				}
+				else
+				{
+					processedText = "Wanna talk about something else?";
+				}
+				// use contentChecker here
 			}
 			else
 			{
-				processedText = "Boring that wan't a meme.";
+				if (memeChecker(userText))
+				{
+					processedText = "hey, you found a meme: " + userText;
+					processedText += " I love that one!!";
+				}
+				else
+				{
+					processedText = "Boring that wan't a meme.";
+				}
 			}
 		}
-		
-		
+
 		return processedText;
 	}
 
@@ -120,26 +139,29 @@ public class ChatBot
 		
 		if(input.length() >=15)
 		{
-			isTooLong;
+			isTooLong = true;
 		}
 		
 		return isTooLong;
 	}
-	
+
 	private boolean contentChecker(String input)
 	{
-		boolean hasMyContent = false;
+		content = "games";
 		
-		if(input.contains(content))
+		boolean hasMyContent = false;
+
+		if (input.equalsIgnoreCase(content))
 		{
 			hasMyContent = true;
 		}
-		
+
 		return hasMyContent;
 	}
-	
+
 	/**
 	 * This will check if the input matches any of the memes.
+	 * 
 	 * @param currentText the text that the user supplies
 	 * @returnWhether the String matched any of the built in memes
 	 */

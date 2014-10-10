@@ -1,7 +1,6 @@
 package chatBot.Controller;
 
 import javax.swing.JOptionPane;
-
 import chatBot.Model.ChatBot;
 import chatBot.View.ChatBotView;
 /**
@@ -33,6 +32,7 @@ public class ChatBotAppController
 		appView = new ChatBotView(this);
 		Billy = new ChatBot("Billy");
 		startMessage = "Welcome to the " +Billy.getName() +" ChatBot, type in your name.";
+		
 		
 	}
 	
@@ -67,7 +67,7 @@ public class ChatBotAppController
 	 */
 	private void quit()
 	{
-		appView.displayInformation(" Goodbye cruel user.");
+		appView.displayInformation(" Goodbye :(");
 		System.exit(0);
 	}
 }
