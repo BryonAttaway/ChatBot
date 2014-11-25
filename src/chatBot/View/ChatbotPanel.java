@@ -43,6 +43,7 @@ public class ChatbotPanel extends JPanel
 	{
 		chatArea.setLineWrap(true);
 		chatArea.setWrapStyleWord(true);
+		chatArea.setEditable(false);
 	}
 	
 	private void setupPanel()
@@ -78,7 +79,11 @@ public class ChatbotPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				sampleField.setText(sampleField.getText() + " :O OMG ");
+				String userTypedText = sampleField.getText();
+				String chatbotResponse = baseController.sendTextToChatbot(userTypedText);
+				displayTextToUser(userTypedText);
+				displayTextToUser(chatbotResponse);
+				sampleField.setText("");
 			}
 		});
 		
@@ -90,4 +95,10 @@ public class ChatbotPanel extends JPanel
 			}
 		});
 	}
+
+	public void displayTextToUser(String input)
+	{
+		chatArea.append("\n" + input);
+	}
+
 }
