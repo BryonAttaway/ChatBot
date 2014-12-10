@@ -12,7 +12,6 @@ public class ChatbotPanel extends JPanel
 {	
 	private ChatBotAppController baseController;
 	private JButton sampleButton;	
-	private JButton nextButton;
 	private JTextField sampleField;	
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
@@ -22,8 +21,7 @@ public class ChatbotPanel extends JPanel
 	{
 		this.baseController = baseController;
 		
-		sampleButton = new JButton("click on me, or DIE >:)");
-		nextButton = new JButton("Or click on me :D");
+		sampleButton = new JButton("Talk to me");
 		sampleField = new JTextField(25);
 		chatArea = new JTextArea(5, 25);
 		chatArea.setTabSize(5);
@@ -53,8 +51,7 @@ public class ChatbotPanel extends JPanel
 		
 		this.add(sampleButton);
 		this.add(sampleField);
-		this.add(chatPane);	
-		add(nextButton);
+		this.add(chatPane);
 	}
 		
 	private void setupLayout()
@@ -69,8 +66,6 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, chatPane, 225, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, sampleField, 3, SpringLayout.NORTH, chatPane);
 		baseLayout.putConstraint(SpringLayout.WEST, sampleField, 6, SpringLayout.EAST, chatPane);
-		baseLayout.putConstraint(SpringLayout.NORTH, nextButton, 22, SpringLayout.SOUTH, sampleButton);
-		baseLayout.putConstraint(SpringLayout.WEST, nextButton, 0, SpringLayout.WEST, sampleButton);
 	}
 		
 	private void setupListeners()
@@ -81,24 +76,16 @@ public class ChatbotPanel extends JPanel
 			{
 				String userTypedText = sampleField.getText();
 				String chatbotResponse = baseController.sendTextToChatbot(userTypedText);
-				displayTextToUser(userTypedText);
+				displayTextToUser(userTypedText + "\n");
 				displayTextToUser(chatbotResponse);
-				sampleField.setText("");
-			}
-		});
-		
-		nextButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				sampleField.setText(sampleField.getText() + " you clicked on me!!!! ");
+//				sampleField.setText("");
 			}
 		});
 	}
 
 	public void displayTextToUser(String input)
 	{
-		chatArea.append("\n" + input);
+		chatArea.append(input);
 	}
 
 }

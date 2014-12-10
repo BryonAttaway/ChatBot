@@ -91,77 +91,98 @@ public class ChatBot
 	public String processText(String userText)
 	{
 		String processedText = "";
-		incrementChats();
-
-		int randomChoice = (int) (Math.random() * 5);
 
 		if (userText != null)
 		{
-			if (numberOfChats < 5)
+			if (numberOfChats < 4)
 			{
-				//you will need to use some if's or a switch
-				//Save userText to the shatUser's appropriate field.
-				//For items that are not strings you will the wrapper
-				//like Integer.parseInt(userText) to saveas an int
-				//or Boolean.parseBoolean(userTExt) to save as a boolean
-				
-				if(numberOfChats == 0)
-				{
-					myUser.setUser(userText);
-					processedText = "Hello " + myUser.getUser() + " what is your age?";
-				}
-				else if(numberOfChats == 1)
-				{
-					int age = Integer.parseInt(userText);
-					myUser.setAge(age);
-					processedText = myUser.getUser() + ", you are really " + myUser.getAge() + " years old?";
-					processedText += "\nWhat is your favorite movie?";
-				}
-				
+				processedText = introChat(userText);
 			}
 			else
 			{
-				
-				if (randomChoice == 0)
-				{
-					if(stringLengthChecker(userText))
-					{
-						processedText = "Hey, you should type smaller messages";
-					}
-					else
-					{
-						processedText = "tiny message";
-					}
-				
-					// use stringLengthChecker here
-				}
-				else if (randomChoice == 1)
-				{
-					if(contentChecker(userText))
-					{
-						processedText = "You know exactly what i want to learn about :) games, will you tell me about your favorite game?";
-					}
-					else
-					{
-						processedText = "Wanna talk about something else?";
-					}
-					// use contentChecker here
-				}
-				else
-				{
-					if (memeChecker(userText))
-					{
-						processedText = "hey, you found a meme: " + userText;
-						processedText += " I love that one!!";
-					}
-					else
-					{
-						processedText = "Boring that wan't a meme.";
-					}
-				}
+				processedText = randomChat(userText);
 			}
+			
 		}
 
+		incrementChats();
+		
+		return processedText;
+	}
+	
+	private String introChat(String userText)
+	{
+		String processedText = "";
+		
+		
+			
+			//you will need to use some if's or a switch
+			//Save userText to the shatUser's appropriate field.
+			//For items that are not strings you will the wrapper
+			//like Integer.parseInt(userText) to save as an int
+			//or Boolean.parseBoolean(userTExt) to save as a boolean
+			
+			if(numberOfChats == 0)
+			{
+				myUser.setUser(userText);
+				processedText = "Hello " + myUser.getUser() + " how old are you " + myUser.getUser() + "? \n";
+			}
+			else
+			{
+				int age = Integer.parseInt(userText);
+				myUser.setAge(age);
+				processedText = myUser.getUser() + ", you are really " + myUser.getAge() + " years old, thats awesome";
+				processedText += "\nWhat is your favorite movie?";
+			}
+			
+		
+		return processedText;
+	}
+	
+	private String randomChat(String userText)
+	{
+		String processedText = "";
+		
+		int randomChoice = (int) (Math.random() * 6);
+		
+		if (randomChoice == 0)
+		{
+			if(stringLengthChecker(userText))
+			{
+				processedText = "Hey, you should type smaller messages";
+			}
+			else
+			{
+				processedText = "tiny message";
+			}
+		
+			// use stringLengthChecker here
+		}
+		else if (randomChoice == 1)
+		{
+			if(contentChecker(userText))
+			{
+				processedText = "You know exactly what i want to learn about :) games, will you tell me about your favorite game?";
+			}
+			else
+			{
+				processedText = "Wanna talk about something else?";
+			}
+			// use contentChecker here
+		}
+		else
+		{
+			if (memeChecker(userText))
+			{
+				processedText = "hey, you found a meme: " + userText;
+				processedText += " I love that one!!";
+			}
+			else
+			{
+				processedText = "Boring that wan't a meme.";
+			}
+		}
+		
 		return processedText;
 	}
 	

@@ -38,7 +38,7 @@ public class ChatBotAppController
 		appView = new ChatBotView(this);
 		baseFrame = new ChatbotFrame(this);
 		Billy = new ChatBot("Billy");
-		startMessage = "Welcome to the " +Billy.getName() +" ChatBot, type in your name.";
+		startMessage = "Hi, im Billy the ChatBot, what is your name? \n";
 		
 		
 	}
@@ -57,7 +57,7 @@ public class ChatBotAppController
 	 */
 	public void start()
 	{
-		String message = appView.displayChatBotConversations(startMessage);
+//		String message = appView.displayChatBotConversations(startMessage);
 
 		ChatbotPanel myAppPanel = (ChatbotPanel) baseFrame.getContentPane();
 		myAppPanel.displayTextToUser(startMessage);
