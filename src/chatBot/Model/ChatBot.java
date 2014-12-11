@@ -125,14 +125,19 @@ public class ChatBot
 			if(numberOfChats == 0)
 			{
 				myUser.setUser(userText);
-				processedText = "Hello " + myUser.getUser() + " how old are you " + myUser.getUser() + "? \n";
+				processedText = "Hello " + myUser.getUser() + " how old are you ?";
 			}
-			else
+			else if (numberOfChats == 1)
 			{
 				int age = Integer.parseInt(userText);
 				myUser.setAge(age);
 				processedText = myUser.getUser() + ", you are really " + myUser.getAge() + " years old, thats awesome";
 				processedText += "\nWhat is your favorite movie?";
+			}
+			else if (numberOfChats == 2)
+			{
+				processedText = "That is a great movie\n";
+				processedText += "What was your favorite part?\n";
 			}
 			
 		
@@ -149,11 +154,11 @@ public class ChatBot
 		{
 			if(stringLengthChecker(userText))
 			{
-				processedText = "Hey, you should type smaller messages";
+				processedText = "Hey, you should type smaller messages\n";
 			}
 			else
 			{
-				processedText = "tiny message";
+				processedText = "tiny message\n";
 			}
 		
 			// use stringLengthChecker here
@@ -162,11 +167,11 @@ public class ChatBot
 		{
 			if(contentChecker(userText))
 			{
-				processedText = "You know exactly what i want to learn about :) games, will you tell me about your favorite game?";
+				processedText = "You know exactly what i want to learn about :) games, will you tell me about your favorite game?\n";
 			}
 			else
 			{
-				processedText = "Wanna talk about something else?";
+				processedText = "Wanna talk about something else?\n";
 			}
 			// use contentChecker here
 		}
@@ -175,12 +180,17 @@ public class ChatBot
 			if (memeChecker(userText))
 			{
 				processedText = "hey, you found a meme: " + userText;
-				processedText += " I love that one!!";
+				processedText += " I love that one!!\n";
 			}
 			else
 			{
-				processedText = "Boring that wan't a meme.";
+				processedText = "Boring that wan't a meme.\n";
 			}
+		}
+		
+		if (quitChecker(userText))
+		{
+			processedText = "bye";
 		}
 		
 		return processedText;
@@ -242,7 +252,7 @@ public class ChatBot
 
 		for (String currentMeme : memeList)
 		{
-			if (currentMeme.equalsIgnoreCase(currentText))
+			if (currentMeme.contains(currentText))
 			{
 				isAMeme = true;
 			}

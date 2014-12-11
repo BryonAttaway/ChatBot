@@ -71,6 +71,10 @@ public class ChatBotAppController
 		
 		
 		respondText = Billy.processText(userInput);
+		if (respondText == "bye")
+		{
+			quit();
+		}
 		
 		return respondText;
 	}
